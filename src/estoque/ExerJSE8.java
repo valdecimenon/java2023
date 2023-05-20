@@ -25,7 +25,7 @@ public class ExerJSE8 {
 				break;
 
 			case EXCLUIR:
-				out.println("Excluindo...");
+				excluir();
 				break;
 
 			case LISTAR:
@@ -67,6 +67,33 @@ public class ExerJSE8 {
 		} else {
 			System.out.println("Não há mais espaço no array estoque!");
 		}
+	}
+	
+	private static void excluir() throws IOException {
+		String nome = Teclado.lerString("Nome do produto para excluir: ");
+		boolean apagou = false;
+		
+		// busca sequencial
+		for(int i=0; i<arrEstoque.length; i++) {
+			Produto p = arrEstoque[i];
+			if (p.getNome().equalsIgnoreCase(nome)) {
+				arrEstoque[i] = null;
+				realocarArray(i);
+				posicao--;
+				apagou = true;
+				break;
+			}
+		}
+				
+		System.out.println(apagou ? "Produto deletado!" : "Produto não encontrado!");
+	}
+
+	private static void realocarArray(int inicio) {
+		for (int i=inicio; i<arrEstoque.length - 1; i++) {
+			arrEstoque[i] = arrEstoque[i+1];
+		}
+		
+		arrEstoque[arrEstoque.length - 1] = null;
 	}
 
 }
