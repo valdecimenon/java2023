@@ -17,9 +17,9 @@ public interface GenericAbstractDAO<T, ID> {
 	
 	Iterable<T> findAll();
 	
-	void delete(T entity);
+	void delete(ID primaryKey);
 	
-	boolean existsById(ID primaryKey, T entity);
+	boolean existsById(ID primaryKey);
 	
 	void update(ID primaryKey, T entity);
 	

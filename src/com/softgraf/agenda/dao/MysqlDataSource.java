@@ -50,44 +50,36 @@ public class MysqlDataSource implements MeuDataSource {
 	
 	@Override
 	public String getStringConexao() {
-		// TODO Auto-generated method stub
-		return null;
+		return "jdbc:" + getDriver() + "://" + getUrl() + "/" + getDatabase();
 	}
 
 	@Override
 	public String getClasse() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("classe");
 	}
 
 	@Override
 	public String getDriver() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("driver");
 	}
 
 	@Override
 	public String getUrl() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("url");
 	}
 
 	@Override
 	public String getDatabase() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("database");
 	}
 
 	@Override
 	public String getUser() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("user");
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return config.getProperty("password");
 	}
-
 }
