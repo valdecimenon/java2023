@@ -162,8 +162,24 @@ public class ContatoRepository implements Repository<Contato> {
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		sql = "select count(*) as quant from contato";
+		long quant = 0;
+		
+		try {
+			stmt  = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			// vai para a primeira linha da tabela retornada no resultset
+			rs.next();
+			quant = rs.getLong("quant");
+			stmt.close();
+					
+		} catch (SQLException e) {
+			System.out.println("Erro em count()");
+			e.printStackTrace();
+		}
+		
+		return quant;
 	}
 
 }

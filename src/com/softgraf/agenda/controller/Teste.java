@@ -36,10 +36,14 @@ public class Teste {
 		System.out.println(repositorio.existsById(1L));
 		System.out.println(repositorio.existsById(10L));
 		
+
+		repositorio.update(7L, new Contato("Helena Souza", "9999-7777"));
 		*/
 		
-		repositorio.update(7L, new Contato("Helena Souza", "9999-7777"));
-			
+		long quant = repositorio.count();
+		System.out.println("Numero de registros: " + quant);
+		
+		
 		conexao.close();
 		System.out.println("OK");
 
