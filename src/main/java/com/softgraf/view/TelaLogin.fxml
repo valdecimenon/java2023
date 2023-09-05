@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.softgraf.controller.ControleLogin">
+   <children>
+      <Label layoutX="48.0" layoutY="40.0" text="Login" />
+      <Label layoutX="48.0" layoutY="98.0" text="Senha" />
+      <TextField fx:id="txtLogin" layoutX="100.0" layoutY="36.0" promptText="Digite o login" />
+      <Button layoutX="62.0" layoutY="154.0" mnemonicParsing="false" onAction="#AcaoOk" text="OK" />
+      <Button layoutX="157.0" layoutY="154.0" mnemonicParsing="false" onAction="#AcaoCancelar" text="Cancelar" />
+      <PasswordField fx:id="txtSenha" layoutX="100.0" layoutY="94.0" promptText="Digite a senha" />
+   </children>
+</AnchorPane>

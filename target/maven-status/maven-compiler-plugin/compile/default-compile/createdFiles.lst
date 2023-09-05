@@ -1,0 +1,9 @@
+com\softgraf\entity\Aluno.class
+com\softgraf\controller\ControleCadastro.class
+com\softgraf\controller\PrincipalApp.class
+com\softgraf\view\Alerta.class
+util\JpaUtil.class
+com\softgraf\entity\Usuario.class
+com\softgraf\controller\ControleLogin.class
+com\softgraf\repository\AlunoRepository.class
+com\softgraf\repository\UsuarioRepository.class
