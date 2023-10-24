@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.softgraf</groupId>
+  <artifactId>CDI_JSP</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+   <dependencies>
+	   
+	   <!-- Dependência do CDI -->
+	   <dependency>
+		   <groupId>org.jboss.weld.servlet</groupId>
+		   <artifactId>weld-servlet-core</artifactId>
+		   <version>5.1.2.Final</version>
+	   </dependency>
+	   
+	   <!-- Jandex é usado pelo Weld -->
+	   <dependency>
+		   <groupId>org.jboss</groupId>
+		   <artifactId>jandex</artifactId>
+		   <version>3.1.2</version>
+	   </dependency>
+	   
+	   <!-- Driver Mysql -->
+	   	<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+		</dependency>
+	   
+	   
+	   <!-- JPA EntityManager com Hibernate -->
+	   	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core-jakarta</artifactId>
+			<version>5.6.15.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss</groupId>
+					<artifactId>jandex</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.2.Final</version>
+		</dependency>
+	   
+	   <!-- JSP (Java Server Pages) e JSTL (Java Server Tag Library)  -->
+	   
+	   <dependency>
+		   <groupId>jakarta.servlet.jsp</groupId>
+		   <artifactId>jakarta.servlet.jsp-api</artifactId>
+		   <version>3.1.1</version>
+		</dependency>
+	   
+	   <dependency>
+		   <groupId>jakarta.servlet.jsp.jstl</groupId>
+		   <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		   <version>3.0.0</version>
+		</dependency>
+	   
+	   <dependency>
+		   <groupId>org.glassfish.web</groupId>
+		   <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+		   <version>3.0.1</version>
+		</dependency>
+	   
+	   <dependency>
+		   <groupId>jakarta.el</groupId>
+		   <artifactId>jakarta.el-api</artifactId>
+		   <version>5.0.1</version>
+		</dependency>
+		
+		<!-- Converte objeto java para formato JSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+	   
+   </dependencies>
+   
+   
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>19</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
