@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+<meta charset="UTF-8"/>
+<title>Navegação</title>
+</h:head>
+<h:body>
+
+	<h1>Página 1</h1>
+	<h3>Forward - reecaminhamento</h3>
+	<p>Feito internamente pelo servidor, mantém dados no escopo request.
+	   Pelo navegador não dá pra saber a página de destino. </p>
+	   
+	
+	<h3>Redirect - redirecionamento</h3>
+	<p>Feito pelo navegador a pedido do servidor. 
+	   Evita que o cliente atualize a tela e um precesso seja executado novamente</p>
+	   
+	<h:form>
+		<p>commandButton envia requisição via POST</p>
+		<h:commandButton value="ir para página 2 com commandButton" action="pag2"/>
+		
+		<br/><br/>
+		<h:commandButton value="ir para página 2 com commandButton outcome" action="acao_cadastrar"/>
+		
+		<br/><br/>
+		<h:commandButton value="ir para página 2 com commandButton redirect" action="pag2?faces-redirect=true"/>
+		
+		<p>link envia requisição via GET</p>
+		<h:link value="Ir para página 2 com link e redirecionar" outcome="pag2"/>
+		
+		<br/><br/>
+		<h:outputLink value="https://softgraf.com" target="_blank">Link Externo: softgraf.com</h:outputLink>
+		
+		<br/><br/>
+		<p>button redireciona e envia requisição com parâmetros via GET</p>
+		<h:button value="Ir para página 2 com button" outcome="pag2"> 
+			<f:param name="nome" value="Valdeci"/>
+		</h:button>
+		
+		<br/><br/>
+		Nome: <h:inputText value="#{usuarioBean.nome}"/>
+		
+		<p>Envia dados para pag2</p>
+		<h:commandButton value="Enviar" action="#{usuarioBean.enviar}"/>
+		
+		<p>Envia dados para pag2 e redireciona, mas perde o bean</p>
+		<!-- ao redirecionar o bean é perdido, por causa do escopo de requisição -->
+		<h:commandButton value="Redirecionar" action="#{usuarioBean.redirecionar}"/>
+		
+		<p>Usa Flash com redirect para resolver o 'problema' acima </p>
+		<h:commandButton value="Redirecionar com Flash" action="#{usuarioBean.redirecionarFlash}"/>
+		<!-- objeto flash desaparece se a página for atualizada -->
+		
+	 </h:form>
+	 
+	
+	
+
+</h:body>
+</html>

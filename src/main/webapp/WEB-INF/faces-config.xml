@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+    version="2.3">
+    
+	<navigation-rule>
+		<display-name>pag1.xhtml</display-name>
+		<from-view-id>/pag1.xhtml</from-view-id>
+		
+		<navigation-case>
+			<from-outcome>acao_cadastrar</from-outcome>
+			<to-view-id>/pag2.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
