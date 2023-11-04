@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<meta charset="UTF-8"/>
+	<title>Tabela Automóveis</title>
+</h:head>
+<h:body>
+
+	<h:outputStylesheet library="css"  name="style.css"/>
+
+	<h:form>
+		<h:dataTable value="#{automoveis.dataModel}" var="auto"
+					 styleClass="tabela" headerClass="titulo" rowClasses="rowImpar,rowPar"
+					 columnClasses="colId,colMarca,colModelo,colAno,colPreco,colObs,colAcao">
+			
+			<f:facet name="header">Tabela de Automóveis</f:facet>
+			
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{automoveis.dataModel.rowIndex + 1}			
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">Marca</f:facet>
+				<h:outputText value="#{auto.marca}" rendered="!false"/>
+				<h:inputText value="#{auto.marca}" rendered="false"/>		
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">Modelo</f:facet>		
+				<h:outputText value="#{auto.modelo}" rendered="#{!auto.editar}"/>	
+				<h:inputText value="#{auto.modelo}" rendered="#{auto.editar}"/>	
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">Ano de Fabricação</f:facet>
+				<h:outputText value="#{auto.anoFabricacao}" rendered="#{!auto.editar}"/>			
+				<h:inputText value="#{auto.anoFabricacao}" rendered="#{auto.editar}"/>			
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">Preço</f:facet>	
+				<h:outputText value="#{auto.preco}" rendered="#{!auto.editar}">
+					<f:convertNumber type="currency" locale="pt_BR"/>
+				</h:outputText>		
+				<h:inputText value="#{auto.preco}" rendered="#{auto.editar}"/>
+			</h:column>
+		
+			<h:column>  
+				<f:facet name="header">Observações</f:facet>
+				<h:outputText value="#{auto.obs}" rendered="#{!auto.editar}"/>			
+				<h:inputText value="#{auto.obs}" rendered="#{auto.editar}"/>			
+			</h:column>
+		
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
+				
+				<h:panelGroup rendered="#{!auto.editar}">
+					<h:commandLink value="Editar" action="#{automoveis.editar(auto)}" styleClass="btn azul"/>
+					<h:commandLink value="Apagar" action="#{automoveis.apagar(auto)}" styleClass="btn laranja"/>
+				</h:panelGroup>
+				
+				<h:commandLink value="Atualizar" action="#{automoveis.atualizar(auto)}"
+							   rendered="#{auto.editar}" styleClass="btn verde"/>
+			</h:column>
+		
+		</h:dataTable>
+		
+		<h:outputText value="Nenhum automóvel cadastrado!" rendered="#{automoveis.dataModel.rowCount == 0}"/>
+		
+		<h:commandButton value="INCLUIR" action="#{automoveis.incluir}" styleClass="btn azul"/>
+	
+	</h:form>
+
+
+</h:body>
+</html>
