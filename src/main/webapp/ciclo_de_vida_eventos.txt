@@ -1,0 +1,44 @@
+* O ciclo de vida do JSF é composto pelas seguintes fases (PhaseId):
+  1. Restore View: restaura a visualização. 
+  2. Apply Request: aplica valores da requisição. 
+  3. Process Validations: processa as validações.  
+  4. Update Model Values: Atualiza os valores no modelo.
+  5. Invoke Application: invocar a aplicação.
+  6. Render Response: renderiza a resposta. 
+
+
+--------------------------------------------------------------------------
+* Eventos JSF são disparados devido à ações do usuário ou pelo próprio JSF
+
+* Existem 4 tipos de eventos:
+
+	- Action Events:
+	  gerados através de um clique em h:commandButton ou h:commandLink
+	  
+	- Value Change Events:
+	  gerados quando um componente muda de valor, por exemplo: h:inputText, h:selectOneMenu, etc.
+	
+	- Phase Events:
+	  gerados pelo próprio JSF quando ocorre mudança de fase da requição, são gerados 2 eventos por fase:
+      - um antes de iniciar a fase (before)
+      - outro depois de terminar a fase (after)
+	
+	- System Events:
+	  diversos tipos de evento gerados pelo próprio JSF e que podem ser interceptados pela aplicação.
+	  Estão normalmente assiciados à: Application, UIComponent (componente JSF) ou UIViewRoot (árvore de componentes da view).
+	  
+	  - Application: 
+	  	- PostConstructApplicationEvent: evento de início da aplicação. 
+	    - PreDestroyApplicationEvent: evento de término da aplicação
+	      usamos a tag <application> em faces-config.xml para configurar
+	                 
+	  - UIViewRoot: 
+	    - PreRenderViewEvent: evento disparado antes da renderização da view.
+	      usado para verificar a autorização do usuário atual à pagina que será renderizada,
+	      ou para carregar e mostrar dados na view.
+	      usamos a tag <f:event type="preRenderView" listener="#{meuBean.carregaDados}"/>
+	    - PostRenderViewEvent: evento disparado após a renderização da view.
+	      usamos a tag <f:event type="postRenderView" listener="#{meuBean.verificaDados}"/>
+  
+  
+  
