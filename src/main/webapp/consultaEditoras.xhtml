@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template.xhtml"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+			    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+	
+	<ui:define name="titulo">bean titutoEditora</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form> 
+			
+			<p:dataTable id="consulta" value="#{bean.editoras}" var="editora"
+						 rows="5" border="1" cellSeparator="0" cellPadding="2"
+						 paginator="true" paginatorPosition="bottom" resizableColumns="true">
+						 
+				<f:facet name="header">Editoras Cadastradas</f:facet>
+				
+				<p:column headerText="ID" style="width:20px">
+					<h:outputText value="#{editora.id}"/>
+				</p:column>
+				
+				<p:column headerText="Nome da Editora" style="width:45px">
+					<h:outputText value="#{editora.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Livros por Editora" style="width:20px">
+					<h:outputText value="#{editora.totalLivros}"/>
+				</p:column>
+				
+				<p:column headerText="Ação" style="width:50px">
+					
+					<p:button value="Editar" outcome="cadastraEditora" icon="pi pi-file-word"
+							  style="margin-right:10px">
+						<f:param name="id" value="#{editora.id}"/>
+					</p:button>
+					
+					<p:commandButton value="Excluir" action="#{bean.excluirEditora}"
+									 process="@this" update="@form" icon="pi pi-eraser"
+									 styleClass="ui-button-warning">
+						<f:setPropertyActionListener value="#{editora.id}" target="#{bean.editoraId}"/>
+					</p:commandButton>
+					
+				</p:column>
+				
+			</p:dataTable>
+		
+		</h:form>
+	
+	</ui:define>
+	
+</ui:composition>
+				

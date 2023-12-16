@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="titulo"/></title>
+	<link rel="shortcut icon" href="https://softgraf.com/site/public/images/favicon.ico"/> 
+</h:head>
+<h:body>
+
+	<h:outputStylesheet library="css" name="style.css"/>
+
+	<header class="cabecalho">
+		<h1>Libraria Super TI 1.0</h1>
+		<h4>by Valdeci Menon</h4>		
+	</header>
+
+	<p:messages showSummary="true" showDetail="true" showIcon="true" autoUpdate="true" closable="true"/>
+	
+	<p:menubar>
+	
+		<p:menuitem value="HOME" url="index.xhtml" icon="pi pi-home"/>
+	
+		<p:submenu label="Cadastrar">
+			<p:menuitem value="Editora" url="cadastraEditora.xhtml"/>
+			<p:menuitem value="Livro" url="cadastraLivro.xhtml"/>
+		</p:submenu>
+	
+	
+		<p:submenu label="Consultar">
+			<p:menuitem value="Editoras" url="consultaEditoras.xhtml"/>
+			<p:menuitem value="Livros" url="consultaLivros.xhtml"/>
+		</p:submenu>
+		
+		<p:submenu label="Gráficos" icon="pi pi-chart-bar">
+			<p:menuitem value="Vendas" url="vendas.xhtml"/>
+		</p:submenu>
+	
+	
+	</p:menubar>
+
+	<ui:insert name="conteudo"/>
+	
+	<hr/>
+	<footer class="rodape">
+		<h3>SOFTGRAF Cursos Avançados</h3>
+		<p>Rua Santana, 820 - Ponta Grossa - PR
+		</p>
+	</footer>
+
+
+</h:body>
+</html>

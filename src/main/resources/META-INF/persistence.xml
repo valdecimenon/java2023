@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<!-- nome da unidade de persistencia -->
+	<persistence-unit name="livraria">
+
+		<jta-data-source>jdbc/LivrariaDS</jta-data-source>
+		
+		<properties>
+			<property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+			<property name="jakarta.persistence.schema-generation.scripts.action" value="none"/>
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
