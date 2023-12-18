@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,27 +14,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Editora implements Serializable {
 
 	private static final long serialVersionUID = 5419294589852687473L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column(length = 60, nullable = false)
 	private String nome;
-	
+
+	@JsonbTransient
 	@OneToMany(mappedBy = "editora", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Livro> livros;
-	
-	// construtor
+
 	public Editora() {
 		this.livros = new HashSet<Livro>();
 	}
-	
+
 	@Transient
 	public int getTotalLivros() {
 		return livros.size();
@@ -47,23 +49,24 @@ public class Editora implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	@XmlTransient
 	public Set<Livro> getLivros() {
 		return livros;
 	}
-	
+
 	public void setLivros(Set<Livro> livros) {
 		this.livros = livros;
 	}
@@ -87,10 +90,7 @@ public class Editora implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Editora [id=%s, nome=%s]", id, nome);
+		return "Editora [id=" + id + ", nome=" + nome + "]";
 	}
-	
-	
-	
 
 }

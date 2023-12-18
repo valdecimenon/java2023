@@ -1,5 +1,6 @@
 package com.softgraf.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import jakarta.inject.Named;
 @RequestScoped
 public class LivrariaBean implements Serializable {
 
-	private static final long serialVersionUID = 618804837894894272L;
+	private static final long serialVersionUID = 1L;
 
 	private Editora editora;
 	private Long editoraId;
@@ -30,22 +31,18 @@ public class LivrariaBean implements Serializable {
 
 	@Inject
 	private MessagesView messages;
-
+	
 	public LivrariaBean() {
 		this.editora = new Editora();
 		this.livro = new Livro();
 	}
 
-	public String salvarEditora() {
-
+	public String salvarEditora() throws IOException {
 		try {
-
 			if (paramId == null) {
-
 				System.out.println("\nSalvando editora: " + editora);
 				service.persist(editora);
 				messages.info("Editora salva");
-				
 			} else {
 				editora.setId(paramId);
 				System.out.println("\nAtualizando editora: " + editora);
@@ -54,7 +51,7 @@ public class LivrariaBean implements Serializable {
 			}
 
 		} catch (Exception ex) {
-			messages.error("NÃ£o foi possÃ­vel salvar/atualizar editora");
+			messages.error("Não foi possível salvar/atualizar editora");
 			System.out.println(ex);
 		}
 
@@ -63,32 +60,29 @@ public class LivrariaBean implements Serializable {
 	}
 
 	public String salvarLivro() {
-		livro.setEditora(service.findEditoraById(editoraId));
-		livro.getEditora().getLivros().add(livro);
-
+		
 		try {
-			System.out.println("\nSalvando livro: " + livro);
-			service.persist(livro);
-			messages.info("Livro salvo");
+			livro.setEditora(service.findEditoraById(editoraId));
+			livro.getEditora().getLivros().add(livro);
+			
+			if (paramId == null) {
+				System.out.println("\nSalvando livro: " + livro);
+				service.persist(livro);
+				messages.info("Livro salvo");
+			} else {
+				livro.setId(paramId);
+				System.out.println("\nAtualizando livro: " + livro);
+				service.update(livro);
+				messages.info("Livro atualizado");
+			}
 
 		} catch (Exception ex) {
-			messages.error("NÃ£o foi possÃ­vel salvar/atualizar livro");
+			messages.error("Não foi possível salvar/atualizar livro");
 			System.out.println(ex);
 		}
 
+		this.paramId = null;
 		return "/index";
-	}
-
-	public String excluirEditora() {
-		try {
-			service.removeEditoraById(editoraId);
-
-		} catch (Exception ex) {
-			messages.error("NÃ£o foi possÃ­vel excluir editora selecionada.");
-			System.out.println(ex);
-		}
-
-		return null;
 	}
 
 	public String excluirLivro() {
@@ -96,17 +90,23 @@ public class LivrariaBean implements Serializable {
 			service.removeLivroById(livroId);
 
 		} catch (Exception ex) {
-			messages.error("NÃ£o foi possÃ­vel excluir livro selecionada.");
+			messages.error("Não foi possível excluir livro selecionado");
 			System.out.println(ex);
 		}
 
 		return null;
 	}
 
-	public void editarEditora() {
-		if (paramId != null) {
-			editora = service.findEditoraById(paramId);
+	public String excluirEditora() {
+		try {
+			service.removeEditoraById(editoraId);
+
+		} catch (Exception ex) {
+			messages.error("Não foi possível excluir editora selecionado");
+			System.out.println(ex);
 		}
+
+		return null;
 	}
 
 	public List<Editora> getEditoras() {
@@ -117,20 +117,41 @@ public class LivrariaBean implements Serializable {
 		return service.todosLivros();
 	}
 
+	public void editarEditora() {
+		if (paramId != null) {
+			editora = service.findEditoraById(paramId);
+		}
+	}
+
+	public void editarLivro() {
+		if (paramId != null) {
+			livro = service.findLivroById(paramId);
+			if (livro.getEditora() != null)
+				editoraId = livro.getEditora().getId();
+		}
+	}
+
+	public String getTituloEditora() {
+		if (paramId == null)
+			return "Cadastra Editora";
+		else
+			return "Edita Editora";
+	}
+
+	public String getTituloLivro() {
+		if (paramId == null)
+			return "Cadastra Livro";
+		else
+			return "Edita Livro";
+	}
+
+	// getters e setters
 	public Editora getEditora() {
 		return editora;
 	}
 
 	public void setEditora(Editora editora) {
 		this.editora = editora;
-	}
-
-	public Long getEditoraId() {
-		return editoraId;
-	}
-
-	public void setEditoraId(Long editoraId) {
-		this.editoraId = editoraId;
 	}
 
 	public Livro getLivro() {
@@ -141,12 +162,20 @@ public class LivrariaBean implements Serializable {
 		this.livro = livro;
 	}
 
+	public Long getEditoraId() {
+		return editoraId;
+	}
+
 	public Long getLivroId() {
 		return livroId;
 	}
 
 	public void setLivroId(Long livroId) {
 		this.livroId = livroId;
+	}
+
+	public void setEditoraId(Long editoraId) {
+		this.editoraId = editoraId;
 	}
 
 	public Long getParamId() {
@@ -156,5 +185,4 @@ public class LivrariaBean implements Serializable {
 	public void setParamId(Long paramId) {
 		this.paramId = paramId;
 	}
-
 }

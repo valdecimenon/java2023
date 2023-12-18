@@ -15,7 +15,12 @@
 	<h:outputStylesheet library="css" name="style.css"/>
 
 	<header class="cabecalho">
-		<h1>Libraria Super TI 1.0</h1>
+		<div style="float: right; margin-right:20px; margin-top: 8px">
+			<p:outputLabel rendered="#{usuario.logado}">
+				Bem vindo #{usuario.nome}
+			</p:outputLabel>
+		</div>
+		<h1>Livraria Super TI 1.0</h1>
 		<h4>by Valdeci Menon</h4>		
 	</header>
 
@@ -23,24 +28,24 @@
 	
 	<p:menubar>
 	
-		<p:menuitem value="HOME" url="index.xhtml" icon="pi pi-home"/>
+		<p:menuitem value="HOME" url="#{nav.home}" icon="pi pi-home"/>
 	
-		<p:submenu label="Cadastrar">
-			<p:menuitem value="Editora" url="cadastraEditora.xhtml"/>
-			<p:menuitem value="Livro" url="cadastraLivro.xhtml"/>
+		<p:submenu label="Cadastrar" rendered="#{usuario.admin}">
+			<p:menuitem value="Editora" url="#{nav.cadastraEditora}"/>
+			<p:menuitem value="Livro" url="#{nav.cadastraLivro}"/>
 		</p:submenu>
 	
-	
 		<p:submenu label="Consultar">
-			<p:menuitem value="Editoras" url="consultaEditoras.xhtml"/>
-			<p:menuitem value="Livros" url="consultaLivros.xhtml"/>
+			<p:menuitem value="Editoras" url="#{nav.consultaEditoras}"/>
+			<p:menuitem value="Livros" url="#{nav.consultaLivros}"/>
 		</p:submenu>
 		
 		<p:submenu label="Gráficos" icon="pi pi-chart-bar">
-			<p:menuitem value="Vendas" url="vendas.xhtml"/>
+			<p:menuitem value="Vendas" url="#{nav.vendas}"/>
 		</p:submenu>
 	
-	
+		<p:menuitem value="Logout" url="#{nav.logout}" rendered="#{usuario.logado}"/>
+		
 	</p:menubar>
 
 	<ui:insert name="conteudo"/>

@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.bar.BarChartDataSet;
 import org.primefaces.model.charts.bar.BarChartModel;
+import org.primefaces.model.charts.bar.BarChartOptions;
+import org.primefaces.model.charts.optionconfig.animation.Animation;
+import org.primefaces.model.charts.optionconfig.title.Title;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -44,32 +49,40 @@ public class GraficoBarras implements Serializable {
 		
 		// cor de cada barra
 		List<String> cores = new ArrayList<String>();
-		cores.add("rgba(255,  99, 132, 0.2)");
-		cores.add("rgba(255, 159,  64, 0.2)");
-		cores.add("rgba(255, 205,  86, 0.2)");
-		cores.add("rgba( 75, 192, 192, 0.2)");
-		cores.add("rgba( 54, 162, 235, 0.2)");
-		cores.add("rgba(153, 102, 255, 0.2)");
-		cores.add("rgba(201, 203, 207, 0.2)");
-		cores.add("rgba(135, 206, 250, 0.2)");
+		cores.add("rgba(255,  99, 132, 0.5)");
+		cores.add("rgba(255, 159,  64, 0.5)");
+		cores.add("rgba(255, 205,  86, 0.5)");
+		cores.add("rgba( 75, 192, 192, 0.5)");
+		cores.add("rgba( 54, 162, 235, 0.5)");
+		cores.add("rgba(153, 102, 255, 0.5)");
+		cores.add("rgba(201, 203, 207, 0.5)");
+		cores.add("rgba(135, 206, 250, 0.5)");
 		
 		// objeto principal: representa todo o gráfico de barras
-		
-		
+		barModel = new BarChartModel();
+		// são os dados gerais do gráfico
+		ChartData dados = new ChartData();
+		barModel.setData(dados);
 		
 		// titulo geral do gráfico de barras
+		Title titulo = new Title();
+		titulo.setText("Vendas 2023");
+		titulo.setDisplay(true);
 		
-		
-		
-		
+		BarChartOptions opcoes = new BarChartOptions();
+		opcoes.setTitle(titulo);
+		opcoes.setAnimation(new Animation());
+		barModel.setOptions(opcoes);
 		
 		// representa o conjunto de dados de cada barra
+		BarChartDataSet barDataSet = new BarChartDataSet();
+		barDataSet.setLabel("livros vendidos no mês");  // legenda
+		barDataSet.setData(vendas);
+		barDataSet.setBackgroundColor(cores);
 		
-		
-		
-		
+		dados.setLabels(meses);
+		dados.addChartDataSet(barDataSet);	
 	}
-	
 	
 	
 	public BarChartModel getBarModel() {

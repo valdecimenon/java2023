@@ -8,12 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Livro implements Serializable {
-
+	
 	private static final long serialVersionUID = 6197393585418967082L;
-
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -23,7 +25,7 @@ public class Livro implements Serializable {
 	
 	@ManyToOne
 	private Editora editora;
-	
+
 	public Livro() {
 		this.editora = new Editora();
 	}
@@ -72,7 +74,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Livro [id=%s, titulo=%s, editora=%s]", id, titulo, editora);
+		return "Livro [id=" + id + ", titulo=" + titulo + ", editora=" + editora + "]";
 	}
 	
 }

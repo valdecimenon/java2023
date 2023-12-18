@@ -17,4 +17,34 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   
+  <security-constraint>
+  
+  	<web-resource-collection>
+	  	<web-resource-name>adminstrador do sistema</web-resource-name>
+	  	<url-pattern>/admin/*</url-pattern>
+  	</web-resource-collection>
+  	
+  	<auth-constraint>
+  		<role-name>admin</role-name>
+  	</auth-constraint>
+  	
+  </security-constraint>
+  
+  
+  <security-constraint>
+  
+  	<web-resource-collection>
+	  	<web-resource-name>usuário comum</web-resource-name>
+	  	<url-pattern>/user/*</url-pattern>
+  	</web-resource-collection>
+  	
+  	<auth-constraint>
+  		<role-name>user</role-name>
+  	</auth-constraint>
+  	
+  </security-constraint>
+  
+  
+  
+  
 </web-app>
