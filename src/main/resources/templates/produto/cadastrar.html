@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	
+<div th:replace="~{base::head}"></div>
+<div th:replace="~{base::navbar}"></div>
+
+<body class="container">
+
+	<div th:replace="~{base::banner('Sistema Primavera', 'Cadastra Novo Produto')}"></div>
+
+	<form action="/produto/salvar" method="post" class="mt-4" enctype="multipart/form-data">
+		<fieldset>
+
+			<div class="form-group mt-2">
+				<label for="id">Código</label> <input type="number" id="id"
+					   name="id" class="form-control" readonly> 
+			    <small>gerado pelo sistema</small>
+			</div>
+
+			<div class="form-group mt-2">
+				<label for="descricao">Descrição</label> <input type="text"
+					   id="descricao" name="descricao" class="form-control" required>
+				<small>descrição completa</small>
+			</div>
+
+			<div class="form-group mt-2">
+				<label for="preco">Preço</label> <input type="text" id="preco"
+					   name="preco" class="form-control" placeholder="valor unitário em R$" required>
+			</div>
+
+			<div class="form-group mt-2">
+				<label for="quantidade">Quantidade</label> <input type="number"
+					id="quantidade" name="quantidade" class="form-control" min="1" required>
+			</div>
+			
+			<div class="form-group mt-2">
+				<label for="url">Imagem</label>
+				<select name="urlImagem" id="urlImagem" class="form-select">
+				   <option>Selecione uma foto da listagem ou do ficheiro</option>
+				   <option th:each="img : ${imagens}" th:value="${img}" th:text="${img}">url imagem</option>
+				</select>
+
+				<input type="file" name="imagem" accept="image/*" class="form-control mt-2">
+			</div>
+				
+			<button type="submit" class="btn btn-primary mt-4">Salvar</button>
+		</fieldset>
+	</form>
+
+</body>
+</html>

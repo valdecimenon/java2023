@@ -1,0 +1,20 @@
+Estereótipos dos beans
+
+
+@Component  = bean genérico => pojo
+@Repository = para uso com o Spring Data (banco de dados)
+@Service    = para implementar as regras de negócio
+@controller = responsável por processar as requisições http
+
+Ciclo de vida do bean
+
+  @Scope("tipo")
+  - Singleton (padrão) = uma única instância para todas as solicitações
+  - Prototype = várias instâncias, uma para cada solicitação
+  - Request = por requisição
+  - Session = por sessão
+  - Application = similar ao singleton, porém será compartilhada por todas as apps.
+  - Websocket - similar so Singleton, porém limitado a usa sessão Websocket
+  
+  
+    

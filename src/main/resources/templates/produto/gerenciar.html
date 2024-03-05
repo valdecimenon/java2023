@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html  lang="pt-BR">
+	
+<div th:replace="~{base::head}"></div>
+<div th:replace="~{base::navbar}"></div>
+
+
+<style>
+		#menu-gerenciar a {
+			font-weight: bold;
+		}
+</style>
+
+
+<body class="container">
+
+	<div th:replace="~{base::banner('Sistema Primavera', 'Gerenciamento de Produtos')}"></div>
+
+	<div class="col">
+		<table class="table table-striped table-responsive table-bordered">
+			
+			<thead class="thead-default">
+				<tr>
+					<th class="col1">Código</th>
+					<th class="col7">Descrição</th>
+					<th class="col1">Preço</th>
+					<th class="col1">Quantidade</th>
+					<th class="col1">Imagem</th>
+					<th class="col1">Gerenciar</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="produto : ${produtos}">
+					<td th:text="${produto.id}">id</td>
+					<td th:text="${#strings.capitalizeWords(produto.descricao)}">descrição</td>
+					<td th:text="${#numbers.formatCurrency(produto.preco)}">preço</td>
+					<td th:text="${produto.quantidade}">quantidade</td>
+					<td>
+						<img th:src="${uploads + produto.url}" width="100"
+							 alt="Produto sem Foto" th:title="${produto.url}"
+							 class="img-thumbnail"/>
+					</td>
+					<td style="text-align: center; vertical-align: middle;">
+						<a class="btn btn-success mt-2"
+						   th:href="@{/produto/alterar/{id}(id=${produto.id})}">Alterar</a>
+						
+						<a class="btn btn-danger mt-2"
+						   th:href="@{/produto/excluir/{id}(id=${produto.id})}">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+		
+		
+		<a class="btn btn-secondary" th:href="@{/produto/gerenciar(page=0,size=${pageSize})}">Primeira</a>
+		
+		<a class="btn btn-secondary" th:href="@{/produto/gerenciar(page=${nextPage},size=${pageSize})}"
+								     th:classappend="${!hasNext}? 'disabled'">Próxima</a>
+		
+		<a class="btn btn-secondary" th:href="@{/produto/gerenciar(page=${previousPage},size=${pageSize})}"
+								     th:classappend="${!hasPrevious}? 'disabled'">Anterior</a>
+		
+		<a class="btn btn-secondary" th:href="@{/produto/gerenciar(page=${lastPage},size=${pageSize})}">Última</a>
+		
+		<a href="/produto/cadastrar" class="btn btn-primary">Cadastar Produto</a>
+		
+	</div>
+
+</body>
+</html>

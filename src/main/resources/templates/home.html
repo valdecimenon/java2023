@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	
+<div th:replace="~{base::head}"></div>
+<div th:replace="~{base::navbar}"></div>
+
+<style>
+		#menu-home a {
+			font-weight: bold;
+		}
+</style>
+
+<body class="container">
+	
+
+		<div th:replace="~{base::banner('Sistema Primavera', 'Bem vindo à homepage')}"></div>
+
+		<div class="row">
+			<div class="col" th:each="produto : ${produtos}">
+
+				<div class="card mb-4" style="width:18rem">
+
+					<img class="img-thumbnail border-0" style="height:16rem" th:src="${uploads + produto.url}" />
+
+					<div class="card-body">
+						<h5 class="card-title" th:text="${#strings.capitalizeWords(produto.descricao)}">descrição</h5>
+						<h6 class="card-subtitle mb-2 text-muted" th:text="${#numbers.formatCurrency(produto.preco)}">
+							preço</h6>
+						<p class="card-text" th:text="${'Restam: ' + produto.quantidade}">Quantidade</p>
+						<p class="card-text" th:text="${'Cód.: ' + produto.id}">ID</p>
+						<a href="#" class="btn btn-secondary">Adicionar ao carrinho</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<a class="btn btn-primary" th:href="@{/homepage(page=0,size=${pageSize})}">Primeira</a>
+		
+		<a class="btn btn-primary" th:href="@{/homepage(page=${nextPage},size=${pageSize})}"
+								   th:classappend="${!hasNext}? 'disabled'">Próxima</a>
+		
+		<a class="btn btn-primary" th:href="@{/homepage(page=${previousPage},size=${pageSize})}"
+								   th:classappend="${!hasPrevious}? 'disabled'">Anterior</a>
+		
+		<a class="btn btn-primary" th:href="@{/homepage(page=${lastPage},size=${pageSize})}">Última</a>
+		
+		<a class="btn btn-primary" th:href="@{/homepage(page=${nextPage},size=${pageSize},sort=preco)}">Próxima (ordem de preço)</a>
+
+
+
+
+
+</body>
+
+</html>
